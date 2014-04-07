@@ -1,0 +1,6 @@
+﻿<div class="panel panel-default" data-ng-repeat="card in cards">
+   <div data-ng-click="submitCard(card)" data-ng-disabled="cardReceived && inProgress">
+      <div class="panel-heading">{{card.Description}}</div>
+      <div class="panel-body">{{card.StoryPoints}}</div>
+   </div>
+</div>
