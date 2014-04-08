@@ -5,12 +5,7 @@
    <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
 </head>
-   <body>
-      <div data-ng-controller="baseController">
-         <input type="text" data-ng-model="signalRSource"/>
-         <button type="button" data-ng-click="setSignalRSource()">start</button>
-      </div>
-      
+   <body>      
       <div ui-view=""></div>
       <script src="Scripts/jquery-2.1.0.min.js"></script>
       <script src="Scripts/angular.min.js"></script>
@@ -28,10 +23,8 @@
       <script src="Config/route-config.js"></script>
       <script src="Config/services.js"></script>
    
+      <script src="App/initLoginController.js"></script>
       <script src="App/loginController.js"></script>
       <script src="App/memberController.js"></script>
-      <script type="text/javascript">
-         
-      </script>
    </body>
 </html>
