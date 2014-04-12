@@ -1,13 +1,13 @@
 .pokerCard{
 	font-family: proxima-nova, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 61px;
+	font-size: 16px;
 	position: absolute;
 	border:solid 1px #333;
 	border-radius: 12px;
 	line-height: 200px;
 	text-align:center;
-	width:200px;
-	height: 200px;
+	width:50px;
+	height: 60px;
 	background: #e0e0e0;
 	cursor: pointer;
 	z-index: 10;
