@@ -11,7 +11,8 @@
 
 		function w2wDragLink(scope, element, attrs){
 			var hammertime = new Hammer(container, { drag_max_touches: 0, prevent_default: true });
-			Hammer(element[0]).on("drag", function(ev) {
+
+			function UpdatePosition(ev){
 				// Set the current position.
 				var positionX = parseInt(ev.gesture.deltaX);
 				var positionY = parseInt(ev.gesture.deltaY);
@@ -23,16 +24,22 @@
 				element.addClass('selected');
 				element.addClass('focus');
 
-			});
+			};
 
-			Hammer(element[0]).on("dragend", function(ev){
+			function UpdatePositionEnd(ev){
 				var left = $(ev.target).offset().left;
 				var top = $(ev.target).offset().top;
 				element.css('left', left + 'px');
 				element.css('top', top + 'px');
 				element.css('-webkit-transform', 'translate3d(0px,0px,0px)');
 				element.css('transform', 'translate3d(0px,0px,0px)');
-			});   
+			}
+			
+			Hammer(element[0]).on("drag", UpdatePosition);
+			Hammer(element[0]).on("touch", UpdatePosition);
+
+			Hammer(element[0]).on("dragend", UpdatePositionEnd);   
+			Hammer(element[0]).on("touchend", UpdatePositionEnd);   
 		};
 	}
 })();
