@@ -13,6 +13,7 @@
 			var hammertime = new Hammer(container, { drag_max_touches: 0, prevent_default: true });
 
 			function UpdatePosition(ev){
+				ev.gesture.preventDefault();
 				// Set the current position.
 				var positionX = parseInt(ev.gesture.deltaX);
 				var positionY = parseInt(ev.gesture.deltaY);
