@@ -5,8 +5,9 @@
    function member($scope, $state, signalRService) {
       $scope.cards = [];
       $scope.cardReceived = false;
+      //signalRService.getCards();
 
-      signalRService.getCards();
+
       $scope.inProgress = false;
       $scope.$on('sessionInProgress', function(e, inProgress) {
          $scope.$apply(function () {
@@ -34,9 +35,18 @@
          }
       };
 
+      $scope.setInitialStyle = function(idx){
+         return { left: (idx * 200) + (idx * 10) + "px"}
+      };
+      
+      var pokerCards = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', 'koffie']
+      $scope.cards = pokerCards;
       $scope.$on('pokerCards', function(e, pokerCards) {
          $scope.$apply(function() {
             $scope.cards = pokerCards;
+
+
+      
          });
       });
    }

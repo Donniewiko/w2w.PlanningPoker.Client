@@ -4,40 +4,14 @@
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
    <title></title>
    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-  <style>
-
-    h1 {
-      margin: 30px;
-      text-align: center;
-    }
-
-    .drag {
-      position: absolute;
-      left: 100px;
-      top: 100px;
-      background: #9fe1e7;
-      border-radius: 50px;
-      width: 100px;
-      height: 100px;
-    }
-
-    .drag1 { background: #42d692; }
-    .drag2 { background: #4986e7; }
-    .drag3 { background: #d06b64; }
-    .drag4 { background: #cd74e6; }
-    .drag5 { background: #9fe1e7; }
-
-  </style>
+   <link href="Content/style.css" rel="stylesheet" />
 </head>
-   <body>      
-<div id="container">
-  <div class="drag drag1"></div>
-  <div class="drag drag2"></div>
-  <div class="drag drag3"></div>
-  <div class="drag drag4"></div>
-  <div class="drag drag5"></div>
+   <body>
+<div data-ng-controller="memberController">
+   <div id="container" style="position:relative;">
+      <div w2w-drag="" data-ng-repeat="card in cards" class="pokerCard" data-ng-style="setInitialStyle($index)">{{card}}</div>
 </div>
-
+</div>
       <div ui-view=""></div>
       <script src="Scripts/jquery-2.1.0.min.js"></script>
       <script src="Scripts/angular.min.js"></script>
@@ -45,8 +19,10 @@
       <script src="Scripts/angular-touch.min.js"></script>
       <script src="Scripts/angular-sanitize.min.js"></script>
       <script src="Scripts/angular-animate.min.js"></script>
+      
       <script src="Scripts/hammer.min.js"></script>
       <script src="Scripts/frame-events.min.js"></script>
+      <script src="Scripts/gestures.js"></script>
 
       <script src="Scripts/bootstrap.min.js"></script>
       <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
@@ -56,37 +32,10 @@
       <script src="Config/config.js"></script>
       <script src="Config/route-config.js"></script>
       <script src="Config/services.js"></script>
-   
+      <script src="Config/directives.js"></script>
+
       <script src="App/initLoginController.js"></script>
       <script src="App/loginController.js"></script>
       <script src="App/memberController.js"></script>
-   <script>
-
-  var container = document.getElementById("container");
-  var fragment = document.createDocumentFragment();
-  
-  var hammertime = new Hammer(container, { drag_max_touches: 0, prevent_default: true });
-  var last_touches = [];  
-  
-  function updatePositions() {
-    Hammer.utils.each(last_touches, function(touch) {
-      if(Hammer.utils.inStr(touch.target.className, "drag")) {
-        fragment.appendChild(touch.target);
-        touch.target.style.cssText = "left:" + (touch.pageX - 50) + "px; top:" + (touch.pageY - 50) + "px";
-      }
-    });
-    container.appendChild(fragment);
-  }
-
-  function collectTouches(ev) {
-    last_touches = ev.gesture.touches;
-  }
-
-  // frame events tries to make it run at 60fps
-  FrameEvents.on(container, "touch", updatePositions, collectTouches);
-  FrameEvents.on(container, "drag", updatePositions, collectTouches);
-
-
-</script>
    </body>
 </html>

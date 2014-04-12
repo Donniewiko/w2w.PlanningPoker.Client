@@ -1,6 +1,14 @@
-﻿<div class="panel panel-default" data-ng-repeat="card in cards">
-   <div data-ng-click="submitCard(card)" data-ng-disabled="cardReceived && inProgress">
-      <div class="panel-heading">{{card.Description}}</div>
-      <div class="panel-body">{{card.StoryPoints}}</div>
-   </div>
+﻿<div id="container" style="position:relative;">
+<div data-hm-drag="tapped($event)" style="position: absolute; border:solid 1px black; width:200px; height: 200px;" >test1	DRAG</div>
+<div data-hm-pinch="tapped($event)" style="position: absolute; border:solid 1px black; width:200px; height: 200px; left: 210px" >test2	PINCH</div>
+<div data-hm-tap="tapped($event)" style="position: absolute; border:solid 1px black; width:200px; height: 200px; left: 210px; top:210px;" >test4 TAP	</div>
+	
+	   <!--
+	   <div data-ng-repeat="card in cards" data-hm-tap="tapped($event)" style="position: absolute; border:solid 1px black; width:200px; height: 200px;" data-w2w-drag="">
+		{{card.Description}}
+	</div><div data-ng-click="submitCard(card)" data-ng-disabled="cardReceived && inProgress">
+	      <div class="panel-heading"></div>
+	      <div class="panel-body">{{card.StoryPoints}}</div>
+	   </div>
+	   -->
 </div>

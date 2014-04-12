@@ -10,6 +10,7 @@
 
        // 3rd Party Modules
        'ui.router',          // routing
-       'ui.bootstrap'      // ui-bootstrap (ex: carousel, pagination, dialog)
+       'ui.bootstrap',      // ui-bootstrap (ex: carousel, pagination, dialog)
+       'angular-gestures'    // For touch actions
    ]);
 })();
