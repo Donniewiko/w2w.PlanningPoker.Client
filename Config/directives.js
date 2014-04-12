@@ -10,6 +10,7 @@
 		};
 
 		function w2wDragLink(scope, element, attrs){
+			var hammertime = new Hammer(container, { drag_max_touches: 0, prevent_default: true });
 			Hammer(element[0]).on("drag", function(ev) {
 				// Set the current position.
 				var positionX = parseInt(ev.gesture.deltaX);
