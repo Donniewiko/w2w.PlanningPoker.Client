@@ -1,3 +1,19 @@
+@media screen and (orientation:portrait) {
+	.loginPanel{
+		width: 75%;
+		margin-top: 20px;
+		margin: auto;
+	}
+}
+
+@media screen and (orientation:landscape) {
+.loginPanel{
+		width: 50%;
+		margin-top: 40px;
+		margin: auto;
+	}
+}
+
 .pokerCard{
 	font-family: proxima-nova, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 16px;

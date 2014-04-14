@@ -1,15 +1,66 @@
 ﻿(function() {
    'use strict';
-   angular.module('app').controller('loginController', ['$scope', 'signalRService', login]);
+   angular.module('app').controller('loginController', ['$scope','$rootScope', '$timeout', '$injector', '$state', login]);
 
-   function login($scope, signalRService) {
-      // when the connection is made to the PlanningPoker.Server the connectionID will be stored on the LocalStorage property SignalRConnectionID
-      // Since the connectionID is published in the SignalRService, a broadcast is send when the client is successfull registered. 
-      // Bind a listner on the registered broadcast.
-      $scope.connectionID = localStorage.SignalRConnectionID;
-      $scope.$on('registered', function(e, connectionID) {
-         $scope.connectionID = connectionID;
-      });
+   function login($scope, $rootScope, $timeout, $injector, $state) {
+      var signalRService;
+      $scope.connectionID = '';
+      //Init
+       function setSignalRSource() {
+         var s = document.createElement('script'); // use global document since Angular's $document is weak
+         s.src = 'http://' + $scope.signalRSource + '/signalr/hubs';
+         document.body.appendChild(s);
+         // Wait 0.5 seconds for the script tags to be added
+         setTimeout(function() {
+            $.connection.hub.url = 'http://' + $scope.signalRSource + '/signalr';
+            var serverHub = $.connection.serverHub;
+
+            // Init the client methods for the PlanningPoker.Server to call.
+            serverHub.client.registerUser = function (connectionID) {
+               $scope.connectionID = connectionID;
+            };
+
+            serverHub.client.proceedLogin = function (dashboard) {
+                  $state.go('member');
+            };
+            
+            serverHub.client.submitCards = function (pokerCards) {
+               $rootScope.$broadcast('pokerCards', pokerCards);
+            };
+
+            serverHub.client.sessionInProgress = function (inProgress) {
+               $rootScope.$broadcast('sessionInProgress', inProgress);
+            };
+
+            serverHub.client.showResults = function(results) {
+               console.log(results);
+               $rootScope.$broadcast('results', results);
+            };
+            serverHub.client.cardReceived = function() {
+               $rootScope.$broadcast('cardReceived');
+            };
+
+            $.connection.hub.start({ jsonp: true }).done(function() {
+               signalRService = $injector.get('signalRService');
+               
+            });
+         }, 500);
+
+      };
+
+
+      $scope.validIP = false;
+
+      $scope.$watch('signalRSource', function(){
+         $timeout.cancel;
+         var ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+         if(ipRegex.test($scope.signalRSource)){
+            var loadSignalRTimeout = $timeout(function() {
+               $scope.validIP = true;
+               setSignalRSource();
+            }, 1000);            
+         }
+      }); 
 
       $scope.submitLogin = function() {
          var userName = $scope.username;

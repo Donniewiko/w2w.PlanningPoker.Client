@@ -7,11 +7,6 @@
    <link href="Content/style.css" rel="stylesheet" />
 </head>
    <body>
-<div data-ng-controller="memberController">
-   <div id="container" style="position:relative;">
-      <div w2w-drag="" data-ng-repeat="card in cards" class="pokerCard" data-ng-style="setInitialStyle($index)">{{card}}</div>
-</div>
-</div>
       <div ui-view=""></div>
       <script src="Scripts/jquery-2.1.0.min.js"></script>
       <script src="Scripts/angular.min.js"></script>
@@ -34,7 +29,6 @@
       <script src="Config/services.js"></script>
       <script src="Config/directives.js"></script>
 
-      <script src="App/initLoginController.js"></script>
       <script src="App/loginController.js"></script>
       <script src="App/memberController.js"></script>
    </body>

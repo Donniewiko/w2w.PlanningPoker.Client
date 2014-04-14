@@ -19,9 +19,10 @@
 				var positionY = parseInt(ev.gesture.deltaY);
 				element.css('-webkit-transform', 'translate3d(' + positionX + 'px,'+positionY+'px,0px)');
 				element.css('transform', 'translate3d(' + positionX + 'px,'+positionY+'px,0px)');
+				
 				$(".pokerCard").each(function(e){
 					$(this).removeClass('selected').removeClass('focus');
-				})
+				});
 				element.addClass('selected');
 				element.addClass('focus');
 
