@@ -6,16 +6,16 @@
       var signalRService;
       $scope.connectionID = '';
       //Init
-       var SignalRSource = {
-         Init: function(){
+       var SignalRSource = {};
+         SignalRSource.Init = function(){
             var s = document.createElement('script'); // use global document since Angular's $document is weak
             s.src = 'http://' + $scope.signalRSource + '/signalr/hubs';
             document.body.appendChild(s);
             // Wait 0.5 seconds for the script tags to be added
-         },
+         };
 
-         Connect: function(){
-            $imeout(function() {
+         SignalRSource.Connect = function(){
+            $timeout(function() {
                $.connection.hub.url = 'http://' + $scope.signalRSource + '/signalr';
                var serverHub = $.connection.serverHub;
                
@@ -51,8 +51,8 @@
                });
          }, 500);
 
-      }
-   };
+      };
+   
 
 $scope.signalRHub = '';
 
@@ -63,12 +63,18 @@ $scope.signalRHub = '';
          var ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
          if(ipRegex.test($scope.signalRSource)){
             var loadSignalRTimeout = $timeout(function() {
-               $scope.validIP = true;
+               
                SignalRSource.Init();
                $scope.signalRHub = $.connection.serverHub;
             }, 1000);            
          }
       }); 
+
+$scope.$watch('signalRHub', function(){
+   if ($scope.signalRHub !== undefined && $scope.signalRHub !== '') {
+      SignalRSource.Connect();
+   };
+});
 
       $scope.submitLogin = function() {
          var userName = $scope.username;
