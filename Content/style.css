@@ -42,3 +42,28 @@
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 }
+
+i.sr-connected{
+	color: #14CC00;
+}
+
+.btn-login{
+	width: 100%;
+	margin-top: 18px;
+}
+
+.icon-inner-right{
+	position: relative;
+}
+
+.icon-inner-right input{
+	padding-right: 30px;
+}
+
+.icon-inner-right i{
+	position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+    top: 25px;
+}

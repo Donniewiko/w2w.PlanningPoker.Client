@@ -6,7 +6,8 @@
 	function w2wDrag($swipe){
 		return{
 			link: w2wDragLink,
-			restrict: 'A'
+			restrict: 'A',
+			scope: "&"
 		};
 
 		function w2wDragLink(scope, element, attrs){
