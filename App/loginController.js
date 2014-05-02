@@ -9,18 +9,16 @@
       $scope.srConnected = false;
       $scope.addresses = settingsService.getAddresses();
       //Init
-       var SignalRSource = {};
+       var SignalRSource = {
                   
-         SignalRSource.Init = function(){
-
+         Init: function(){
             var s = document.createElement('script'); // use global document since Angular's $document is weak
             s.src = 'http://' + $scope.signalRSource + '/signalr/hubs';
             document.body.appendChild(s);
             // Wait 0.5 seconds for the script tags to be added
-         };
+         },
 
-         SignalRSource.Connect = function(){
-
+         Connect: function(){
             $timeout(function() {
                $.connection.hub.url = 'http://' + $scope.signalRSource + '/signalr';
                var serverHub = $.connection.serverHub;
@@ -31,8 +29,9 @@
 	                  $scope.connectionID = connectionID;
 	               };
                
-	               serverHub.client.proceedLogin = function (dashboard) {
-	                     $state.go('member');
+	               serverHub.client.proceedLogin = function (teamMember) {
+                     settingsService.insertUsername(teamMember.Name);
+                     $state.go('member');
 	               };
 	               
 	               serverHub.client.submitCards = function (pokerCards) {
@@ -56,9 +55,9 @@
 	                  
 	               });
                };
-         }, 500);
-};
-
+            }, 500);
+         }
+      };
       
 
    $scope.signalRHub;
