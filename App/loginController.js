@@ -65,12 +65,13 @@
 
    $scope.validIP = false;
    function ValidateAndLoadSignalR (){
-      
+      var ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      if(ipRegex.test($scope.signalRSource)){
          SignalRSource.Init();
          $timeout(function(){
             $scope.signalRHub = $.connection.serverHub;            
          }, 1000);
-      
+      }
    };
 
    $scope.$watch('signalRSource', function(){
