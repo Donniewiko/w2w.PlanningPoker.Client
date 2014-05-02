@@ -25,12 +25,12 @@
       $scope.$on('cardReceived', function() {
          $scope.$apply(function() {
             $scope.cardReceived = true;
-            console.log('received');
          });
       });
 
       $scope.submitCard = function (card) {
          if (!$scope.cardReceived && $scope.inProgress) {
+            console.log(card);
             signalRService.submitCard(card);
          }
       };
