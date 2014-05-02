@@ -1,4 +1,3 @@
-﻿<h1>{{username}}</h1>
-<div id="container" style="position:relative;">
-      <div w2w-drag="" data-ng-click="submitCard(card)" data-ng-repeat="card in cards" class="pokerCard" data-ng-style="setInitialStyle($index)">{{card}}</div>
+﻿<div id="container" style="position:relative;">
+      <div data-ng-click="submitCard(card)" data-ng-repeat="card in cards" class="pokerCard" data-ng-style="setInitialStyle($index)"><span data-ng-bind-html="card"></span></div>
 </div>

@@ -37,10 +37,9 @@
 
       var settings = settingsService.getSettings();
 
-      $scope.username = settings.username;
 
-      $scope.setInitialStyle = function(idx){ return { left: (idx * 50) + (idx * 2) + "px"}};
+      $scope.setInitialStyle = function(idx){ return { left: (idx * 80) + (idx * 2) + "px"}};
 
-      $scope.cards = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?', 'koffie'];
+      $scope.cards = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '<i class="fa fa-question-circle fa-2x"></i>', '<i class="fa fa-coffee fa-2x"></i>'];
    };
 })();
