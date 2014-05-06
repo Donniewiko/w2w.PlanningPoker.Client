@@ -9,54 +9,57 @@
       $scope.srConnected = false;
       $scope.addresses = settingsService.getAddresses();
       //Init
-       var SignalRSource = {};
-         
-         SignalRSource.Init = function(){
+
+       var SignalRSource = {
+                  
+         Init: function(){
             var s = document.createElement('script'); // use global document since Angular's $document is weak
             s.src = 'http://' + $scope.signalRSource + '/signalr/hubs';
             document.body.appendChild(s);
             // Wait 0.5 seconds for the script tags to be added
          };
 
-         SignalRSource.Connect = function(){
+         Connect: function(){
             $timeout(function() {
                $.connection.hub.url = 'http://' + $scope.signalRSource + '/signalr';
                var serverHub = $.connection.serverHub;
                
+               if (serverHub !== undefined) {
+	               // Init the client methods for the PlanningPoker.Server to call.
+	               serverHub.client.registerUser = function (connectionID) {
+	                  $scope.connectionID = connectionID;
+	               };
                
-               // Init the client methods for the PlanningPoker.Server to call.
-               serverHub.client.registerUser = function (connectionID) {
-                  $scope.connectionID = connectionID;
-                  $scope.srConnected = true;
-               };
-
-               serverHub.client.proceedLogin = function (dashboard) {
+	               serverHub.client.proceedLogin = function (teamMember) {
+                     settingsService.insertUsername(teamMember.Name);
                      $state.go('member');
-               };
-               
-               serverHub.client.submitCards = function (pokerCards) {
-                  $rootScope.$broadcast('pokerCards', pokerCards);
-               };
+	               };
+	               
+	               serverHub.client.submitCards = function (pokerCards) {
+	                  $rootScope.$broadcast('pokerCards', pokerCards);
+	               };
 
-               serverHub.client.sessionInProgress = function (inProgress) {
-                  $rootScope.$broadcast('sessionInProgress', inProgress);
-               };
+	               serverHub.client.sessionInProgress = function (inProgress) {
+	                  $rootScope.$broadcast('sessionInProgress', inProgress);
+	               };
 
-               serverHub.client.showResults = function(results) {
-                  console.log(results);
-                  $rootScope.$broadcast('results', results);
-               };
-               serverHub.client.cardReceived = function() {
-                  $rootScope.$broadcast('cardReceived');
-               };
+	               serverHub.client.showResults = function(results) {
+	                  console.log(results);
+	                  $rootScope.$broadcast('results', results);
+	               };
+	               serverHub.client.cardReceived = function() {
+	                  $rootScope.$broadcast('cardReceived');
+	               };
 
-               $.connection.hub.start({ jsonp: true }).done(function() {
-                  signalRService = $injector.get('signalRService');
-                  
-               });
-         }, 500);
-
+	               $.connection.hub.start({ jsonp: true }).done(function() {
+	                  signalRService = $injector.get('signalRService');
+	                  
+	               });
+               };
+            }, 500);
+         }
       };
+      
 
    $scope.signalRHub;
 
@@ -74,6 +77,7 @@
    $scope.$watch('signalRSource', function(){
       ValidateAndLoadSignalR();
    }); 
+
 
    $scope.itemSelected = function(){
       ValidateAndLoadSignalR();

@@ -10,6 +10,15 @@
          var settings = service.getSettings();
          return settings.addresses;
       };
+
+      service.insertUsername = function(username){
+         var settings = service.getSettings();
+
+         settings.username = username;
+
+         service.updateSettings(settings);
+         return true;
+      };
       service.insertAddress = function(address){
          var settings = service.getSettings();
 
@@ -29,7 +38,9 @@
                var defaultSettings = 
                {
                   "addresses": [],
-                  "preferences": []
+                  "preferences": [],
+                  "username" : '',
+                  "pokerCards" : []
                };
             
             service.updateSettings(defaultSettings);
@@ -59,7 +70,7 @@
 
       service.registerUser = function (username, connectionID) {
          // todo: Remove the dashboard part.
-         return serverHub.server.registerTeamMember(username, false, connectionID);
+         return serverHub.server.registerTeamMember(username, connectionID);
       }
 
       service.submitCard = function(card) {
