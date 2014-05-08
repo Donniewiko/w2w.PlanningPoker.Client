@@ -17,7 +17,7 @@
             s.src = 'http://' + $scope.signalRSource + '/signalr/hubs';
             document.body.appendChild(s);
             // Wait 0.5 seconds for the script tags to be added
-         };
+         },
 
          Connect: function(){
             $timeout(function() {
@@ -84,7 +84,6 @@
    };
 
    $scope.$watch('signalRHub', function(){
-      console.log('so');
       if ($scope.signalRHub !== undefined && $scope.signalRHub !== '') {
          settingsService.insertAddress($scope.signalRSource);
          SignalRSource.Connect();

@@ -9,7 +9,9 @@
    <link href="Content/style.css" rel="stylesheet" />
 </head>
       <div ui-view=""></div>
-      
+      <div id="ConsoleLog">
+      <div>
+
       <script src="Scripts/jquery-2.1.0.min.js"></script>
       <script src="Scripts/angular.min.js"></script>
       <script src="Scripts/angular-ui-router.min.js"></script>
@@ -32,5 +34,18 @@
 
       <script src="App/loginController.js"></script>
       <script src="App/memberController.js"></script>
+      <script type="text/javascript">
+      if (typeof console  != "undefined") 
+    if (typeof console.log != 'undefined')
+        console.olog = console.log;
+    else
+        console.olog = function() {};
+
+console.log = function(message) {
+    console.olog(message);
+    $('#ConsoleLog').append('<p>' + message + '</p>');
+};
+console.error = console.debug = console.info =  console.log
+         </script>
    </body>
 </html>
