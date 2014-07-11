@@ -68,6 +68,10 @@
          return serverHub.server.getCards();
       }
 
+      service.disconnect = function() {
+         return serverHub.server.disconnectUser();
+      }
+
       service.registerUser = function (username, connectionID) {
          // todo: Remove the dashboard part.
          return serverHub.server.registerTeamMember(username, connectionID);
