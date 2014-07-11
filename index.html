@@ -1,51 +1,37 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="app">
 <head>
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
    <title></title>
 
    <link href="Content/bootstrap.min.css" rel="stylesheet" />
    <link rel="stylesheet" href="Content/font-awesome.min.css">
    <link href="Content/style.css" rel="stylesheet" />
 </head>
-      <div ui-view=""></div>
-      <div id="ConsoleLog">
-      <div>
+<body>
+   <div ui-view=""></div>
 
-      <script src="Scripts/jquery-2.1.0.min.js"></script>
-      <script src="Scripts/angular.min.js"></script>
-      <script src="Scripts/angular-ui-router.min.js"></script>
-      <script src="Scripts/angular-touch.min.js"></script>
-      <script src="Scripts/angular-sanitize.min.js"></script>
-      <script src="Scripts/angular-animate.min.js"></script>
+   <script src="Scripts/jquery-2.1.0.min.js"></script>
+   <script src="Scripts/angular.min.js"></script>
+   <script src="Scripts/angular-ui-router.min.js"></script>
+   <script src="Scripts/angular-touch.min.js"></script>
+   <script src="Scripts/angular-sanitize.min.js"></script>
+   <script src="Scripts/angular-animate.min.js"></script>
 
-      <script src="Scripts/hammer.min.js"></script>
-      <script src="Scripts/gestures.js"></script>
+   <script src="Scripts/hammer.min.js"></script>
+   <script src="Scripts/gestures.js"></script>
 
-      <script src="Scripts/bootstrap.min.js"></script>
-      <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
-      <script src="Scripts/ui-bootstrap-0.10.0.min.js"></script>
-      <script src="Scripts/ui-bootstrap-tpls-0.10.0.min.js"></script>
-   
-      <script src="Config/config.js"></script>
-      <script src="Config/route-config.js"></script>
-      <script src="Config/services.js"></script>
-      <script src="Config/directives.js"></script>
+   <script src="Scripts/bootstrap.min.js"></script>
+   <script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
+   <script src="Scripts/ui-bootstrap-0.10.0.min.js"></script>
+   <script src="Scripts/ui-bootstrap-tpls-0.10.0.min.js"></script>
 
-      <script src="App/loginController.js"></script>
-      <script src="App/memberController.js"></script>
-      <script type="text/javascript">
-      if (typeof console  != "undefined") 
-    if (typeof console.log != 'undefined')
-        console.olog = console.log;
-    else
-        console.olog = function() {};
+   <script src="Config/config.js"></script>
+   <script src="Config/route-config.js"></script>
+   <script src="Config/services.js"></script>
+   <script src="Config/directives.js"></script>
 
-console.log = function(message) {
-    console.olog(message);
-    $('#ConsoleLog').append('<p>' + message + '</p>');
-};
-console.error = console.debug = console.info =  console.log
-         </script>
-   </body>
+   <script src="App/loginController.js"></script>
+   <script src="App/memberController.js"></script>
+</body>
 </html>
