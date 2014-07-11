@@ -1,24 +1,29 @@
 ﻿(function() {
    'use strict';
-   angular.module('app').controller('memberController', ['$scope', '$state', 'signalRService', 'settingsService', member]);
+   angular.module('app').controller('memberController', ['$scope', '$state', '$window', '$timeout', 'signalRService', 'settingsService', member]);
 
-   function member($scope, $state, signalRService, settingsService) {
+   function member($scope, $state, $window, $timeout, signalRService, settingsService) {
       $scope.cards = [];
       $scope.cardReceived = false;
       //signalRService.getCards();
 
-
-      $scope.inProgress = false;
+      signalRService.getCurrentUser().done(function (data) {
+         $scope.$apply(function() {
+            $scope.currentUser = data;
+         });
+      });
+      
+      $scope.sessionInProgress = false;
       $scope.$on('sessionInProgress', function(e, inProgress) {
-         $scope.$apply(function () {
+         $scope.$apply(function() {
             $scope.cardReceived = false;
-            $scope.inProgress = inProgress;
+            $scope.sessionInProgress = inProgress;
          });
       });
 
       $scope.$on('results', function() {
          $scope.$apply(function() {
-            
+
          });
       });
 
@@ -29,11 +34,31 @@
       });
 
       $scope.submitCard = function (card) {
-         if (!$scope.cardReceived && $scope.inProgress) {
-            console.log(card);
-            signalRService.submitCard(card);
+         if ($scope.selectedCard != card) {
+            $scope.selectedCard = card;
+         }
+
+         else if (!$scope.cardReceived && $scope.sessionInProgress) {
+            console.log($scope.selectedCard);
+            signalRService.submitCard($scope.selectedCard);
          }
       };
+
+      $scope.isSelectedCard = function(card) {
+         return card == $scope.selectedCard;
+      }
+
+      //var onBeforeUnloadHandler = function (event) {
+      //   console.log("leaving...");
+      //   $timeout(console.log("wachten"), 400);
+      //   signalRService.disconnect();
+      //}
+
+      //if ($window.addEventListener) {
+      //   $window.addEventListener('beforeunload', onBeforeUnloadHandler);
+      //} else {
+      //   $window.onbeforeunload = onBeforeUnloadHandler;
+      //}
 
       var settings = settingsService.getSettings();
 

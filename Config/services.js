@@ -81,6 +81,10 @@
          return serverHub.server.submitCard(card);
       }
 
+      service.getCurrentUser = function () {
+         return serverHub.server.getCurrentUser();
+      }
+
       return service;
    }]);
 

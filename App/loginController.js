@@ -4,7 +4,8 @@
 
    function login($scope, $rootScope, $timeout, $injector, $state, $http, settingsService) {
       var signalRService;
-
+      $scope.signalRSource = "192.168.107.45";
+      $scope.username = "LENNIC - "+ Date.now();
       $scope.connectionID;
       $scope.srConnected = false;
       $scope.addresses = settingsService.getAddresses();

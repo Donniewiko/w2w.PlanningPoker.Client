@@ -1,4 +1,8 @@
-﻿<div id="container" style="position:relative;">
-
-      <div data-ng-click="submitCard(card)" data-ng-repeat="card in cards" class="pokerCard" data-ng-style="setInitialStyle($index)"><span data-ng-bind-html="card"></span></div>
+﻿<h4>Ingelogd als: {{currentUser.Name}}</h4>
+<h4>--Ronde gestart: {{sessionInProgress}}--</h4>
+<h4>Selected card: {{selectedCard}}</h4>
+<div id="container" style="position:relative;" data-ng-class="cardReceived ? 'screenFill' : ''">
+   <div data-ng-click="submitCard(card)" data-ng-repeat="card in cards" class="pokerCard" data-ng-class="sessionInProgress ? isSelectedCard(card) ? 'selected' : '' : 'disabled'" data-ng-style="setInitialStyle($index)">
+      <span data-ng-bind-html="card"></span>
+   </div>
 </div>
