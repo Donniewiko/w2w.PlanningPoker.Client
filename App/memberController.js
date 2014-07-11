@@ -7,12 +7,7 @@
       $scope.cardReceived = false;
       //signalRService.getCards();
 
-      signalRService.getCurrentUser().done(function (data) {
-         $scope.$apply(function() {
-            $scope.currentUser = data;
-         });
-      });
-      
+     
       $scope.sessionInProgress = false;
       $scope.$on('sessionInProgress', function(e, inProgress) {
          $scope.$apply(function() {
