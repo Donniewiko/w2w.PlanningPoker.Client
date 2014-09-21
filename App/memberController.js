@@ -39,6 +39,11 @@
          }
       };
 
+      $scope.insomnia = '';
+      document.addEventListener("deviceready", function(){
+         $scope.insomnia = window.plugins.insomnia.keepAwake();
+      });
+
       $scope.isSelectedCard = function(card) {
          return card == $scope.selectedCard;
       }
