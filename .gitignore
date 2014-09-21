@@ -213,3 +213,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+planningPoker/hooks
+planningPoker/merges
+planningPoker/platforms
+planningPoker/plugins
+planningPoker/config.xml

@@ -1,4 +1,7 @@
-﻿<div id="container" style="position:relative;">
+﻿
+<button onclick="window.plugins.insomnia.keepAwake()">keep awake</button>
+<button onclick="window.plugins.insomnia.allowSleepAgain()">allow sleep again</button>
+<div id="container" style="position:relative;">
    <div data-ng-click="submitCard(card)" data-ng-repeat="card in cards" class="pokerCard" data-ng-class="sessionInProgress ? isSelectedCard(card) ? 'selected' : '' : 'disabled'" data-ng-style="setInitialStyle($index)">
       <span data-ng-bind-html="card"></span>
    </div>
